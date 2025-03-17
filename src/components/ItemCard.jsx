@@ -11,14 +11,18 @@ import toast, { Toaster } from "react-hot-toast";
 const ItemCard = ({ id, name, qty, price, img }) => {
   const dispatch = useDispatch();
 
+  const handleDeleteToast = (name) => {
+    toast(`${name} Removed!`, {
+      icon: "👋🏻",
+    });
+  };
+
   return (
     <div className="flex gap-2 shadow-md rounded-lg px-2 py-3 relative mb-3">
       <AiFillDelete
         onClick={() => {
           dispatch(removeFromCart({ id, img, name, price, qty }));
-          toast(`${name} Removed!`, {
-            icon: "👋🏻",
-          });
+          handleDeleteToast(name);
         }}
         className="absolute text-lg right-2 text-red-500 hover:text-red-300 cursor-pointer "
       />
