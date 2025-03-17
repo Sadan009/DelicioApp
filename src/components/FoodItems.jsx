@@ -8,6 +8,9 @@ const FoodItems = () => {
   // to filter data first we use useSelector:
   const category = useSelector((state) => state.category.category);
 
+  // search functionality:
+  const search = useSelector((state) => state.search.search);
+
   const handleToast = (name) => toast.success(`${name} added to cart`);
 
   return (
@@ -16,9 +19,12 @@ const FoodItems = () => {
       <div className="flex flex-wrap  gap-8 justify-center">
         {FoodData.filter((food) => {
           if (category === "All") {
-            return food;
+            return food.name.toLowerCase().includes(search.toLowerCase());
           } else {
-            return category === food.category;
+            return (
+              category === food.category &&
+              food.name.toLowerCase().includes(search.toLowerCase())
+            );
           }
         }).map((food) => {
           return (
