@@ -9,11 +9,12 @@ const FoodItems = () => {
         return (
           <FoodCard
             key={food.id}
+            id={food.id}
             name={food.name}
             price={food.price}
             desc={food.desc}
             rating={food.rating}
-            foodImg={food.img}
+            img={food.img}
           />
         );
       })}
