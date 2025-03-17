@@ -6,6 +6,7 @@ import {
   decrementQty,
   incrementQty,
 } from "../redux/slices/CartSlice";
+import toast, { Toaster } from "react-hot-toast";
 
 const ItemCard = ({ id, name, qty, price, img }) => {
   const dispatch = useDispatch();
@@ -13,7 +14,12 @@ const ItemCard = ({ id, name, qty, price, img }) => {
   return (
     <div className="flex gap-2 shadow-md rounded-lg px-2 py-3 relative mb-3">
       <AiFillDelete
-        onClick={() => dispatch(removeFromCart({ id, img, name, price, qty }))}
+        onClick={() => {
+          dispatch(removeFromCart({ id, img, name, price, qty }));
+          toast(`${name} Removed!`, {
+            icon: "👋🏻",
+          });
+        }}
         className="absolute text-lg right-2 text-red-500 hover:text-red-300 cursor-pointer "
       />
       <img src={img} alt="" className="w-[70px] h-[50px]" />
