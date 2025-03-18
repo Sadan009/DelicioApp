@@ -13,7 +13,7 @@ const CategoryMenu = () => {
       ...new Set(FoodData.map((food) => food.category)),
     ];
     setCategories(listUniqueCategory);
-    console.log(listUniqueCategory);
+    // console.log(listUniqueCategory);
   };
 
   useEffect(() => {
@@ -31,7 +31,7 @@ const CategoryMenu = () => {
           className={`lg:px-3 px-3 py-1 lg:py-2 
             cursor-pointer bg-gray-200 font-semibold 
             rounded-lg hover:bg-green-500 hover:text-white
-${selectedCategory === "All" && "bg-green-500 text-white"}
+            ${selectedCategory === "All" && "bg-green-500 text-white"}
             `}
         >
           All

@@ -3,11 +3,15 @@ import { IoMdClose } from "react-icons/io";
 import ItemCard from "./ItemCard";
 import { useSelector } from "react-redux";
 import { FaShoppingCart } from "react-icons/fa";
+import { useNavigate } from "react-router-dom";
 
 const Cart = () => {
   const [activeCart, setActiveCart] = useState(false);
 
+  const navigate = useNavigate();
+
   const cartItems = useSelector((state) => state.cart.cart);
+  
   const totalItems = cartItems.reduce(
     (totalQty, item) => totalQty + item.qty,
     0
@@ -52,11 +56,27 @@ const Cart = () => {
         )}
 
         <div className="absolute bottom-0  border-t-2 border-gray-300 ">
-          <h3 className="font-semibold text-gray-800">Items: {totalItems}</h3>
-          <h3 className="font-semibold text-gray-800">
+          <h3
+            className={`font-semibold text-gray-800 ${
+              cartItems.length > 0 ? "text-gray-800" : "text-white"
+            }`}
+          >
+            Items: {totalItems}
+          </h3>
+          <h3
+            className={`font-semibold text-gray-800 ${
+              cartItems.length > 0 ? "text-gray-800" : "text-white"
+            }`}
+          >
             Total Amount: {totalPrice}
           </h3>
-          <button className="bg-green-500 font-bold px-3 w-[90vw] lg:w-[18vw] text-white py-2 rounded-md mb-5 ">
+          <button
+            disabled={cartItems.length == 0 ? true : false}
+            onClick={() => navigate("/success")}
+            className={` font-bold px-3 w-[90vw] lg:w-[18vw] text-white py-2 rounded-md mb-5 ${
+              cartItems.length > 0 ? "bg-green-500" : "bg-gray-300 text-gray-400"
+            }`}
+          >
             Buy Now
           </button>
         </div>
